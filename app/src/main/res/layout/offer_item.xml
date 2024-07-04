@@ -42,7 +42,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="3dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="7dp"
         android:drawablePadding="1dp"
         android:fontFamily="@font/sf_pro_display_regular"
         android:textColor="@color/white"

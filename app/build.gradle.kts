@@ -44,6 +44,7 @@ dependencies {
     implementation(project(":data"))
     implementation(libs.androidx.lifecycle.livedata.ktx)
     implementation(libs.androidx.fragment.ktx)
+    implementation(libs.androidx.cardview)
 
     ksp (libs.dagger.compiler)
     implementation (libs.dagger)

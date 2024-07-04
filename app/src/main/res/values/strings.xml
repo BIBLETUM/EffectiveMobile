@@ -2,4 +2,13 @@
     <string name="app_name">EffectiveMobile</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="search_for_cheap_air_tickets">Поиск дешевых авиабилетов</string>
+    <string name="Minsk">Минск</string>
+    <string name="musically_fly_off">Музыкально отлететь</string>
+    <string name="where_turkey">Куда - Турция</string>
+    <string name="air_tickets">Авиабилеты</string>
+    <string name="hotels">Отели</string>
+    <string name="long_story_short">Короче</string>
+    <string name="subscriptions">Подписки</string>
+    <string name="profile">Профиль</string>
 </resources>
