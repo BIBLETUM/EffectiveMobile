@@ -10,4 +10,8 @@
         <item name="android:textSize">10sp</item>
         <item name="fontFamily">@font/sf_pro_display_regular</item>
     </style>
+
+    <style name="Widget.MaterialComponents.BottomSheet.DragHandle" parent="Widget.Material3.BottomSheet.DragHandle">
+        <item name="tint">@color/grey5</item>
+    </style>
 </resources>

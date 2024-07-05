@@ -11,4 +11,12 @@
     <string name="long_story_short">Короче</string>
     <string name="subscriptions">Подписки</string>
     <string name="profile">Профиль</string>
+    <string name="complex_route">Сложный маршрут</string>
+    <string name="last_minute_tickets">Горячие билеты</string>
+    <string name="day_offs">Выходные</string>
+    <string name="anywhere">Куда угодно</string>
+    <string name="istanbul">Стамбул</string>
+    <string name="popular_direction">Популярное навправление</string>
+    <string name="sochi">Сочи</string>
+    <string name="phuket">Пхукет</string>
 </resources>
