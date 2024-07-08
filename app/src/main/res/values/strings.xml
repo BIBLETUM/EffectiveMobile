@@ -26,4 +26,6 @@
     <string name="show_all">Показать все</string>
     <string name="subscribe_for_price">Подписаться на цену</string>
     <string name="see_all_tickets">Посмотреть все билеты</string>
+    <string name="filter">Фильтр</string>
+    <string name="price_chart">График цен</string>
 </resources>
