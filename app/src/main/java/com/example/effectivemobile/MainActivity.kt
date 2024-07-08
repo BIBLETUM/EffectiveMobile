@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val fragment = MainFragment.newInstance()
+        val fragment = SearchFeaturedTicketsFragment.newInstance()
         supportFragmentManager.beginTransaction().replace(binding.mainContainer.id, fragment).commit()
 
         val modalBottomSheet = BottomSheetSearch()

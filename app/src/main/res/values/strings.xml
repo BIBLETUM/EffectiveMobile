@@ -19,4 +19,11 @@
     <string name="popular_direction">Популярное навправление</string>
     <string name="sochi">Сочи</string>
     <string name="phuket">Пхукет</string>
+    <string name="backwards">обратно</string>
+    <string name="economy">1,эконом</string>
+    <string name="filters">фильтры</string>
+    <string name="direct_flights">Прямые рейсы</string>
+    <string name="show_all">Показать все</string>
+    <string name="subscribe_for_price">Подписаться на цену</string>
+    <string name="see_all_tickets">Посмотреть все билеты</string>
 </resources>
