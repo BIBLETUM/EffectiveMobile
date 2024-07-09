@@ -6,17 +6,18 @@ import okhttp3.MediaType
 import okhttp3.Protocol
 import okhttp3.Response
 import okhttp3.ResponseBody
-import java.io.BufferedReader
-import java.io.InputStream
+import java.io.FileReader
 
 class MockInterceptor : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
         val url = chain.request().url()
-        val path = "res/raw/${url.getLastPathSegment()}"
-        val response = path.readFile(this)
+        val path = "D:\\EffectiveMobile\\data\\src\\main\\res/raw/${url.getLastPathSegment()}"
+        val reader = FileReader(path)
+        val response = reader.readText()
+        reader.close()
 
-        require(!response.isNullOrEmpty()) { "JSON file $path should exist and not be empty" }
+        require(response.isNotEmpty()) { "JSON file $path should exist and not be empty" }
 
         return Response.Builder()
             .code(200)
@@ -27,12 +28,6 @@ class MockInterceptor : Interceptor {
             .addHeader("content-type", "application/json")
             .build()
     }
-
-    private fun String.openStream(clz: Any) = clz.javaClass.classLoader?.getResourceAsStream(this)
-
-    private fun InputStream.readFile() = this.bufferedReader().use(BufferedReader::readText)
-
-    private fun String.readFile(clz: Any) = this.openStream(clz)?.readFile()
 
     private fun HttpUrl.getLastPathSegment(): String = this.pathSegments().last()
 }

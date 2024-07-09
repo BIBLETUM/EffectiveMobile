@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
-    tools:context=".AllTicketsFragment">
+    tools:context=".presentation.AllTicketsFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -68,7 +68,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="26dp"
-            tools:listitem="@layout/flight_item_with_comment"/>
+            tools:listitem="@layout/flight_item_with_comment" />
 
     </LinearLayout>
 
@@ -110,5 +110,13 @@
             app:drawableTint="@color/white" />
 
     </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        tools:visibility="visible" />
 
 </FrameLayout>

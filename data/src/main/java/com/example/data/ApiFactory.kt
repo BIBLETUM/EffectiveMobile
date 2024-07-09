@@ -14,9 +14,9 @@ object ApiFactory {
         .build()
 
     private val retrofit = Retrofit.Builder()
-        .addConverterFactory(GsonConverterFactory.create())
-        .client(mockClient)
         .baseUrl(BASE_URL)
+        .client(mockClient)
+        .addConverterFactory(GsonConverterFactory.create())
         .build()
 
     val apiService: ApiService = retrofit.create(ApiService::class.java)
