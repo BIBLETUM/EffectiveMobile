@@ -11,13 +11,20 @@ import java.io.BufferedReader
 import java.io.InputStreamReader
 import javax.inject.Inject
 
-class MockInterceptor @Inject constructor(val _application: Application) : Interceptor {
+class MockInterceptor @Inject constructor(val application: Application) : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
-        val context = _application.applicationContext
+        val context = application.applicationContext
         val url = chain.request().url()
-        val path = "raw/${url.getLastPathSegment()}"
-        val resourceId = context.resources.getIdentifier(path, "raw", context.packageName)
+        val path = url.getLastPathSegment()
+        val resourceId = when (path) {
+            "offers.json" -> R.raw.offers
+            "offers_tickets.json" -> R.raw.offers_tickets
+            "tickets.json" -> R.raw.tickets
+            else -> {
+                throw Exception("Unknown resource $path")
+            }
+        }
 
         val inputStream = context.resources.openRawResource(resourceId)
         val reader = BufferedReader(InputStreamReader(inputStream))
@@ -25,13 +32,6 @@ class MockInterceptor @Inject constructor(val _application: Application) : Inter
         reader.close()
 
         require(response.isNotEmpty()) { "JSON file $path should exist and not be empty" }
-
-//        val path = "res/raw/${url.getLastPathSegment()}"
-//        val reader = FileReader(path)
-//        val response = reader.readText()
-//        reader.close()
-//
-//        require(response.isNotEmpty()) { "JSON file $path should exist and not be empty" }
 
         return Response.Builder()
             .code(200)

@@ -1,5 +1,6 @@
 package com.example.effectivemobile.di
 
+import android.app.Application
 import com.example.data.ApiFactory
 import com.example.data.ApiService
 import com.example.data.RepositoryImpl
@@ -18,8 +19,8 @@ interface ModuleData {
     companion object {
         @Provides
         @ApplicationScope
-        fun provideApiService(): ApiService {
-            return ApiFactory.apiService
+        fun provideApiService(application: Application): ApiService {
+            return ApiFactory.createApiService(application)
         }
     }
 

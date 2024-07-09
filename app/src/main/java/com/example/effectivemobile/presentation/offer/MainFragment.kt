@@ -4,7 +4,6 @@ import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,6 +16,7 @@ import com.example.effectivemobile.databinding.FragmentMainBinding
 import com.example.effectivemobile.presentation.BottomSheetSearch
 import com.example.effectivemobile.presentation.EffectiveMobileApplication
 import com.example.effectivemobile.presentation.ViewModelFactory
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -48,6 +48,7 @@ class MainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentMainBinding.inflate(inflater, container, false)
+        getTextsFromPrefs()
         return binding.root
     }
 
@@ -66,7 +67,6 @@ class MainFragment : Fragment() {
                 when (state) {
                     is OfferFragmentState.Error -> {
                         binding.progress.isVisible = false
-                        Log.d("Adabo", state.errorMessage)
                         Toast.makeText(requireContext(), state.errorMessage, Toast.LENGTH_SHORT)
                             .show()
                     }
@@ -85,15 +85,42 @@ class MainFragment : Fragment() {
         lifecycleScope.launch {
             viewModel.shouldOpenModalWindow.collect { shouldOpenModalWindow ->
                 if (shouldOpenModalWindow) {
-                    val modalBottomSheet = BottomSheetSearch()
-                    modalBottomSheet.show(
-                        requireActivity().supportFragmentManager,
-                        BottomSheetSearch.TAG
-                    )
+                    delay(3000)
+                    showBottomSheetDialog()
                 }
             }
         }
     }
+
+    private fun showBottomSheetDialog() {
+        val existingFragment = requireActivity().supportFragmentManager.findFragmentByTag(BottomSheetSearch.TAG)
+        if (existingFragment == null) {
+            val modalBottomSheet = BottomSheetSearch()
+            modalBottomSheet.show(
+                requireActivity().supportFragmentManager,
+                BottomSheetSearch.TAG
+            )
+        }
+    }
+
+    private fun getTextsFromPrefs() {
+        val sharedPreferences = activity?.getPreferences(Context.MODE_PRIVATE)
+        val departureText = sharedPreferences?.getString(DEPARTURE_KEY, "") ?: ""
+        val arrivalText = sharedPreferences?.getString(ARRIVAL_KEY, "") ?: ""
+        binding.departureET.setText(departureText)
+        binding.arrivalET.setText(arrivalText)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        val sharedPreferences = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
+        with(sharedPreferences.edit()) {
+            putString(DEPARTURE_KEY, binding.departureET.text.toString())
+            putString(ARRIVAL_KEY, binding.arrivalET.text.toString())
+            apply()
+        }
+    }
+
 
     private fun setUpListeners() {
         with(binding) {
@@ -139,5 +166,7 @@ class MainFragment : Fragment() {
 
     companion object {
         fun newInstance() = MainFragment()
+        const val DEPARTURE_KEY = "departureText"
+        const val ARRIVAL_KEY = "arrivalText"
     }
 }

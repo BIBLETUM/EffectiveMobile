@@ -30,7 +30,6 @@ class MainFragmentViewModel @Inject constructor(
                     _shouldOpenModalWindow.emit(true)
                 }
             }
-
             false -> {
                 viewModelScope.launch {
                     _shouldOpenModalWindow.emit(false)
