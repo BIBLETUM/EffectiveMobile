@@ -1,3 +1,31 @@
 <resources>
     <string name="app_name">EffectiveMobile</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="search_for_cheap_air_tickets">Поиск дешевых авиабилетов</string>
+    <string name="Minsk">Минск</string>
+    <string name="musically_fly_off">Музыкально отлететь</string>
+    <string name="where_turkey">Куда - Турция</string>
+    <string name="air_tickets">Авиабилеты</string>
+    <string name="hotels">Отели</string>
+    <string name="long_story_short">Короче</string>
+    <string name="subscriptions">Подписки</string>
+    <string name="profile">Профиль</string>
+    <string name="complex_route">Сложный маршрут</string>
+    <string name="last_minute_tickets">Горячие билеты</string>
+    <string name="day_offs">Выходные</string>
+    <string name="anywhere">Куда угодно</string>
+    <string name="istanbul">Стамбул</string>
+    <string name="popular_direction">Популярное навправление</string>
+    <string name="sochi">Сочи</string>
+    <string name="phuket">Пхукет</string>
+    <string name="backwards">обратно</string>
+    <string name="economy">1,эконом</string>
+    <string name="filters">фильтры</string>
+    <string name="direct_flights">Прямые рейсы</string>
+    <string name="show_all">Показать все</string>
+    <string name="subscribe_for_price">Подписаться на цену</string>
+    <string name="see_all_tickets">Посмотреть все билеты</string>
+    <string name="filter">Фильтр</string>
+    <string name="price_chart">График цен</string>
 </resources>
