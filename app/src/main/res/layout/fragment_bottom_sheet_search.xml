@@ -78,6 +78,7 @@
         android:orientation="horizontal">
 
         <LinearLayout
+            android:id="@+id/complex_route"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -105,6 +106,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/anywhere"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -133,6 +135,7 @@
 
 
         <LinearLayout
+            android:id="@+id/day_offs"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -161,6 +164,7 @@
 
 
         <LinearLayout
+            android:id="@+id/last_minute_tickets"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"

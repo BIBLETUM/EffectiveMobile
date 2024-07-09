@@ -1,6 +1,7 @@
 package com.example.effectivemobile.di
 
 import androidx.lifecycle.ViewModel
+import com.example.effectivemobile.presentation.BottomSheetSearchViewModel
 import com.example.effectivemobile.presentation.offer.MainFragmentViewModel
 import dagger.Binds
 import dagger.Module
@@ -13,10 +14,10 @@ interface ModuleViewModel {
     @Binds
     @ViewModelKey(MainFragmentViewModel::class)
     fun bindMainFragmentViewModel(impl: MainFragmentViewModel): ViewModel
-//
-//    @IntoMap
-//    @ViewModelKey(PokemonProfileViewModel::class)
-//    @Binds
-//    fun bindPokemonProfileViewModel(impl: PokemonProfileViewModel): ViewModel
+
+    @IntoMap
+    @ViewModelKey(BottomSheetSearchViewModel::class)
+    @Binds
+    fun bindBottomSheetSearchViewModel(impl: BottomSheetSearchViewModel): ViewModel
 
 }
