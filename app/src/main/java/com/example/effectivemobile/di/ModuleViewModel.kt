@@ -1,7 +1,7 @@
 package com.example.effectivemobile.di
 
 import androidx.lifecycle.ViewModel
-import com.example.effectivemobile.presentation.MainFragmentViewModel
+import com.example.effectivemobile.presentation.offer.MainFragmentViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap

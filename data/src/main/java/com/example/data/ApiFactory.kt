@@ -3,11 +3,11 @@ package com.example.data
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Inject
 
 object ApiFactory {
 
     private const val BASE_URL = "https://anything.com/"
-
     private val mockInterceptor = MockInterceptor()
     private val mockClient = OkHttpClient.Builder()
         .addInterceptor(mockInterceptor)

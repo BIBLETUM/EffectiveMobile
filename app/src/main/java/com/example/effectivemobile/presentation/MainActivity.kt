@@ -3,6 +3,7 @@ package com.example.effectivemobile.presentation
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.effectivemobile.databinding.ActivityMainBinding
+import com.example.effectivemobile.presentation.offer.MainFragment
 
 class MainActivity : AppCompatActivity() {
 
