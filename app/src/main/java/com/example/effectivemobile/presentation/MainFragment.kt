@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.effectivemobile.databinding.FragmentMainBinding
-import com.example.effectivemobile.presentation.utils.CyrillicInputFilter
 import javax.inject.Inject
 
 class MainFragment : Fragment() {
@@ -19,7 +18,7 @@ class MainFragment : Fragment() {
 
     private lateinit var viewModel: MainFragmentViewModel
 
-    //private lateinit var adapter: PokemonListAdapter
+//    private lateinit var adapter: PokemonListAdapter
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
@@ -53,12 +52,6 @@ class MainFragment : Fragment() {
     override fun onDestroyView() {
         _binding = null
         super.onDestroyView()
-    }
-
-
-    private fun setCyrillicFilter(){
-        binding.arrivalET.filters = arrayOf(CyrillicInputFilter())
-        binding.departureET.filters = arrayOf(CyrillicInputFilter())
     }
 
     companion object {
