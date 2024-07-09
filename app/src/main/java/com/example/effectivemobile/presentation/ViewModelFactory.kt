@@ -1,4 +1,4 @@
-package com.example.effectivemobile.di
+package com.example.effectivemobile.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

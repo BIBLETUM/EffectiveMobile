@@ -12,13 +12,13 @@ import dagger.Component
 @Component(modules = [ModuleData::class, ModuleViewModel::class])
 interface ApplicationComponent {
 
-    fun inject(fragment: AllTicketsFragment)
-
-    fun inject(fragment: BottomSheetSearch)
+//    fun inject(fragment: AllTicketsFragment)
+//
+//    fun inject(fragment: BottomSheetSearch)
 
     fun inject(fragment: MainFragment)
-
-    fun inject(fragment: SearchFeaturedTicketsFragment)
+//
+//    fun inject(fragment: SearchFeaturedTicketsFragment)
 
     @Component.Factory
     interface ApplicationComponentFactory {

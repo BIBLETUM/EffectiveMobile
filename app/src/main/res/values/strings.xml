@@ -28,4 +28,5 @@
     <string name="see_all_tickets">Посмотреть все билеты</string>
     <string name="filter">Фильтр</string>
     <string name="price_chart">График цен</string>
+    <string name="where_from_moscow">Откуда - Москва</string>
 </resources>

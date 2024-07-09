@@ -13,10 +13,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val fragment = SearchFeaturedTicketsFragment.newInstance()
+        val fragment = MainFragment.newInstance()
         supportFragmentManager.beginTransaction().replace(binding.mainContainer.id, fragment).commit()
-
-        val modalBottomSheet = BottomSheetSearch()
-        modalBottomSheet.show(supportFragmentManager, BottomSheetSearch.TAG)
     }
 }
