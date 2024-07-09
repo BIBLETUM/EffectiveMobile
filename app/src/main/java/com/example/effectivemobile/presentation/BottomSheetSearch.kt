@@ -1,12 +1,10 @@
-package com.example.effectivemobile
+package com.example.effectivemobile.presentation
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.effectivemobile.databinding.FragmentBottomSheetSearchBinding
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDED
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class BottomSheetSearch : BottomSheetDialogFragment() {
