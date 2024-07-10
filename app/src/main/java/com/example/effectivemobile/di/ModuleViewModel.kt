@@ -1,6 +1,7 @@
 package com.example.effectivemobile.di
 
 import androidx.lifecycle.ViewModel
+import com.example.effectivemobile.presentation.all_tickets.AllTicketsViewModel
 import com.example.effectivemobile.presentation.bottom_sheet.BottomSheetSearchViewModel
 import com.example.effectivemobile.presentation.featured_tickets.FeaturedTicketsViewModel
 import com.example.effectivemobile.presentation.offer.MainFragmentViewModel
@@ -25,5 +26,10 @@ interface ModuleViewModel {
     @ViewModelKey(FeaturedTicketsViewModel::class)
     @Binds
     fun bindFeaturedTicketsViewModel(impl: FeaturedTicketsViewModel): ViewModel
+
+    @IntoMap
+    @ViewModelKey(AllTicketsViewModel::class)
+    @Binds
+    fun bindAllTicketsViewModelViewModel(impl: AllTicketsViewModel): ViewModel
 
 }

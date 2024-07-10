@@ -184,6 +184,7 @@
                         android:src="@drawable/menu_profile_icon" />
 
                     <TextView
+                        android:id="@+id/passengers_TV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -271,6 +272,7 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/see_all_tickets_TV"
             android:layout_width="match_parent"
             android:layout_height="42dp"
             android:layout_marginTop="23dp"

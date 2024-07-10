@@ -11,6 +11,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.effectivemobile.databinding.FragmentSearchFeaturedTicketsBinding
 import com.example.effectivemobile.presentation.EffectiveMobileApplication
@@ -110,7 +111,21 @@ class SearchFeaturedTicketsFragment : Fragment() {
             dateChip.setOnClickListener {
                 showDatePickerDialog(true)
             }
+            seeAllTicketsTV.setOnClickListener {
+                openFragmentsAllTickets()
+            }
         }
+    }
+
+    private fun openFragmentsAllTickets() {
+        val action =
+            SearchFeaturedTicketsFragmentDirections.actionSearchFeaturedTicketsFragmentToAllTicketsFragment(
+                binding.departureET.text.toString(),
+                binding.arrivalET.text.toString(),
+                binding.passengersTV.text.toString(),
+                binding.dayMonthTV.text.toString()
+            )
+        findNavController().navigate(action)
     }
 
     private fun setChipDate(calendar: Calendar) {

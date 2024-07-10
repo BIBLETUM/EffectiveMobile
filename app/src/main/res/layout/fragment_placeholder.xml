@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.PlaceholderFragment">
+    tools:context=".presentation.placeholders.PlaceholderFragment">
 
     <Button
         android:id="@+id/back"

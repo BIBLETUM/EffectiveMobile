@@ -1,4 +1,4 @@
-package com.example.effectivemobile.presentation.featured_tickets
+package com.example.effectivemobile.presentation.all_tickets
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -8,21 +8,20 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class FeaturedTicketsViewModel @Inject constructor(
+class AllTicketsViewModel @Inject constructor(
     private val repository: Repository
 ) : ViewModel() {
 
-    private val _state = MutableStateFlow<FeaturedTicketsState>(FeaturedTicketsState.Loading)
+    private val _state = MutableStateFlow<AllTicketsFragmentState>(AllTicketsFragmentState.Loading)
     val state = _state.asStateFlow()
 
     init {
         viewModelScope.launch {
             try {
-                _state.value = FeaturedTicketsState.Content(offers = repository.getOfferTickets())
+                _state.value = AllTicketsFragmentState.Content(offers = repository.getTickets())
             } catch (e: Exception) {
-                _state.value = FeaturedTicketsState.Error(e.toString())
+                _state.value = AllTicketsFragmentState.Error(e.toString())
             }
         }
     }
-
 }
