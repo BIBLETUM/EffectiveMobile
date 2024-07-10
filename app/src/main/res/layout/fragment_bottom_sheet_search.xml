@@ -9,7 +9,7 @@
     android:background="@drawable/rounded_corners_top_16_dp"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context=".presentation.BottomSheetSearch">
+    tools:context=".presentation.bottom_sheet.BottomSheetSearch">
 
     <View
         android:layout_width="38dp"

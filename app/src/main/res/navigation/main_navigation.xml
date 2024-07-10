@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/allTicketsFragment"
+        android:name="com.example.effectivemobile.presentation.AllTicketsFragment"
+        android:label="fragment_all_tickets"
+        tools:layout="@layout/fragment_all_tickets" />
+    <dialog
+        android:id="@+id/bottomSheetSearch"
+        android:name="com.example.effectivemobile.presentation.bottom_sheet.BottomSheetSearch"
+        android:label="fragment_bottom_sheet_search"
+        tools:layout="@layout/fragment_bottom_sheet_search">
+        <argument
+            android:name="departureText"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_bottomSheetSearch_to_placeholderFragment2"
+            app:destination="@id/placeholderFragment2" />
+        <action
+            android:id="@+id/action_bottomSheetSearch_to_searchFeaturedTicketsFragment"
+            app:destination="@id/searchFeaturedTicketsFragment" />
+    </dialog>
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.example.effectivemobile.presentation.offer.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main">
+        <action
+            android:id="@+id/action_mainFragment_to_bottomSheetSearch"
+            app:destination="@id/bottomSheetSearch" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchFeaturedTicketsFragment"
+        android:name="com.example.effectivemobile.presentation.SearchFeaturedTicketsFragment"
+        android:label="fragment_search_featured_tickets"
+        tools:layout="@layout/fragment_search_featured_tickets" >
+        <argument
+            android:name="departureText"
+            app:argType="string" />
+        <argument
+            android:name="arrivalText"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/placeholderFragment2"
+        android:name="com.example.effectivemobile.presentation.PlaceholderFragment"
+        android:label="PlaceholderFragment" />
+</navigation>

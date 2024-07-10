@@ -2,8 +2,6 @@ package com.example.effectivemobile.presentation.offer
 
 import android.content.Context
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,11 +10,11 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import com.example.effectivemobile.R
 import com.example.effectivemobile.databinding.FragmentMainBinding
-import com.example.effectivemobile.presentation.BottomSheetSearch
 import com.example.effectivemobile.presentation.EffectiveMobileApplication
 import com.example.effectivemobile.presentation.ViewModelFactory
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -85,21 +83,16 @@ class MainFragment : Fragment() {
         lifecycleScope.launch {
             viewModel.shouldOpenModalWindow.collect { shouldOpenModalWindow ->
                 if (shouldOpenModalWindow) {
-                    delay(3000)
-                    showBottomSheetDialog()
+                    val action =
+                        MainFragmentDirections.actionMainFragmentToBottomSheetSearch(binding.departureET.text.toString())
+                    findNavController().navigate(action)
+                } else {
+                    Toast.makeText(
+                        requireContext(),
+                        getString(R.string.fill_departure_field), Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
-        }
-    }
-
-    private fun showBottomSheetDialog() {
-        val existingFragment = requireActivity().supportFragmentManager.findFragmentByTag(BottomSheetSearch.TAG)
-        if (existingFragment == null) {
-            val modalBottomSheet = BottomSheetSearch()
-            modalBottomSheet.show(
-                requireActivity().supportFragmentManager,
-                BottomSheetSearch.TAG
-            )
         }
     }
 
@@ -124,38 +117,9 @@ class MainFragment : Fragment() {
 
     private fun setUpListeners() {
         with(binding) {
-            departureET.addTextChangedListener(object : TextWatcher {
-                override fun afterTextChanged(s: Editable?) {
-                    viewModel.textChanged(departureET.text.toString(), arrivalET.text.toString())
-                }
-
-                override fun beforeTextChanged(
-                    s: CharSequence?,
-                    start: Int,
-                    count: Int,
-                    after: Int
-                ) {
-                }
-
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                }
-            })
-            arrivalET.addTextChangedListener(object : TextWatcher {
-                override fun afterTextChanged(s: Editable?) {
-                    viewModel.textChanged(departureET.text.toString(), arrivalET.text.toString())
-                }
-
-                override fun beforeTextChanged(
-                    s: CharSequence?,
-                    start: Int,
-                    count: Int,
-                    after: Int
-                ) {
-                }
-
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                }
-            })
+            arrivalET.setOnClickListener {
+                viewModel.textChanged(departureET.text.toString())
+            }
         }
     }
 

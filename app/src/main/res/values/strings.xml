@@ -29,4 +29,5 @@
     <string name="filter">Фильтр</string>
     <string name="price_chart">График цен</string>
     <string name="where_from_moscow">Откуда - Москва</string>
+    <string name="fill_departure_field">Заполните поле отправления</string>
 </resources>

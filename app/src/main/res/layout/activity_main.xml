@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,10 +7,12 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/main_container"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/bottom_navigation"
-        tools:layout="@layout/fragment_main" />
+        android:layout_above="@id/bottom_navigation"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/main_navigation" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
@@ -31,4 +32,3 @@
         app:menu="@menu/main_menu" />
 
 </RelativeLayout>
-

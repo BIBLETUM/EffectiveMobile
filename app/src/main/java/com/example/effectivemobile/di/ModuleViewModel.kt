@@ -1,7 +1,7 @@
 package com.example.effectivemobile.di
 
 import androidx.lifecycle.ViewModel
-import com.example.effectivemobile.presentation.BottomSheetSearchViewModel
+import com.example.effectivemobile.presentation.bottom_sheet.BottomSheetSearchViewModel
 import com.example.effectivemobile.presentation.offer.MainFragmentViewModel
 import dagger.Binds
 import dagger.Module

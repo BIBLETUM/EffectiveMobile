@@ -2,7 +2,7 @@ package com.example.effectivemobile.di
 
 import android.app.Application
 import com.example.effectivemobile.presentation.AllTicketsFragment
-import com.example.effectivemobile.presentation.BottomSheetSearch
+import com.example.effectivemobile.presentation.bottom_sheet.BottomSheetSearch
 import com.example.effectivemobile.presentation.SearchFeaturedTicketsFragment
 import com.example.effectivemobile.presentation.offer.MainFragment
 import dagger.BindsInstance
