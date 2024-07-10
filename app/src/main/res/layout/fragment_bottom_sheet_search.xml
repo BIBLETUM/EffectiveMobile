@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/rounded_corners_top_16_dp">
+
+<LinearLayout
     android:id="@+id/standard_bottom_sheet"
     android:layout_width="match_parent"
-    android:layout_height="744dp"
-    android:background="@drawable/rounded_corners_top_16_dp"
+    android:layout_height="match_parent"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context=".presentation.BottomSheetSearch">
+    tools:context=".presentation.bottom_sheet.BottomSheetSearch">
 
     <View
         android:layout_width="38dp"
@@ -56,7 +62,7 @@
             android:background="@null"
             android:digits="АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмнопрстуфхцчшщъыьэюя"
             android:drawableEnd="@drawable/cross_icon"
-            android:drawablePadding="10dp"
+            android:drawablePadding="14.5dp"
             android:fontFamily="@font/sf_pro_display_semibold"
             android:hint="@string/where_turkey"
             android:inputType="text"
@@ -77,6 +83,7 @@
         android:orientation="horizontal">
 
         <LinearLayout
+            android:id="@+id/complex_route"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -104,6 +111,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/anywhere"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -132,6 +140,7 @@
 
 
         <LinearLayout
+            android:id="@+id/day_offs"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -160,6 +169,7 @@
 
 
         <LinearLayout
+            android:id="@+id/last_minute_tickets"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -380,3 +390,4 @@
 
 
 </LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

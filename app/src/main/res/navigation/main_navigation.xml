@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.example.effectivemobile.presentation.offer.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main">
+        <action
+            android:id="@+id/action_mainFragment_to_placeholderFragment2"
+            app:destination="@id/placeholderFragment2" />
+        <action
+            android:id="@+id/action_mainFragment_to_searchFeaturedTicketsFragment"
+            app:destination="@id/searchFeaturedTicketsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/searchFeaturedTicketsFragment"
+        android:name="com.example.effectivemobile.presentation.featured_tickets.SearchFeaturedTicketsFragment"
+        android:label="fragment_search_featured_tickets"
+        tools:layout="@layout/fragment_search_featured_tickets">
+        <argument
+            android:name="departureText"
+            app:argType="string" />
+        <argument
+            android:name="arrivalText"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_searchFeaturedTicketsFragment_to_allTicketsFragment"
+            app:destination="@id/allTicketsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/placeholderFragment2"
+        android:name="com.example.effectivemobile.presentation.placeholders.PlaceholderFragment"
+        android:label="PlaceholderFragment" />
+
+    <fragment
+        android:id="@+id/placeholderFragmentMenu"
+        android:name="com.example.effectivemobile.presentation.placeholders.PlaceholderFragmentMenu"
+        android:label="fragment_placeholder_menu"
+        tools:layout="@layout/fragment_placeholder_menu" />
+
+    <fragment
+        android:id="@+id/allTicketsFragment"
+        android:name="com.example.effectivemobile.presentation.all_tickets.AllTicketsFragment"
+        android:label="fragment_all_tickets"
+        tools:layout="@layout/fragment_all_tickets">
+        <argument
+            android:name="departure"
+            app:argType="string" />
+        <argument
+            android:name="arrival"
+            app:argType="string" />
+        <argument
+            android:name="passenger"
+            app:argType="string" />
+        <argument
+            android:name="date"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/blankFragment"
+        android:name="com.example.effectivemobile.presentation.placeholders.BlankFragment"
+        android:label="fragment_blank"
+        tools:layout="@layout/fragment_blank" />
+
+    <fragment
+        android:id="@+id/blankFragment2"
+        android:name="com.example.effectivemobile.presentation.placeholders.BlankFragment2"
+        android:label="fragment_blank2"
+        tools:layout="@layout/fragment_blank2" />
+
+    <fragment
+        android:id="@+id/blankFragment3"
+        android:name="com.example.effectivemobile.presentation.placeholders.BlankFragment3"
+        android:label="fragment_blank3"
+        tools:layout="@layout/fragment_blank3" />
+
+</navigation>

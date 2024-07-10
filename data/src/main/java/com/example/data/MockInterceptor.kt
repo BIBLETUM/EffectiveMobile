@@ -1,19 +1,33 @@
 package com.example.data
 
+import android.app.Application
 import okhttp3.HttpUrl
 import okhttp3.Interceptor
 import okhttp3.MediaType
 import okhttp3.Protocol
 import okhttp3.Response
 import okhttp3.ResponseBody
-import java.io.FileReader
+import java.io.BufferedReader
+import java.io.InputStreamReader
+import javax.inject.Inject
 
-class MockInterceptor : Interceptor {
+class MockInterceptor @Inject constructor(val application: Application) : Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
+        val context = application.applicationContext
         val url = chain.request().url()
-        val path = "D:\\EffectiveMobile\\data\\src\\main\\res/raw/${url.getLastPathSegment()}"
-        val reader = FileReader(path)
+        val path = url.getLastPathSegment()
+        val resourceId = when (path) {
+            "offers.json" -> R.raw.offers
+            "offers_tickets.json" -> R.raw.offers_tickets
+            "tickets.json" -> R.raw.tickets
+            else -> {
+                throw Exception("Unknown resource $path")
+            }
+        }
+
+        val inputStream = context.resources.openRawResource(resourceId)
+        val reader = BufferedReader(InputStreamReader(inputStream))
         val response = reader.readText()
         reader.close()
 
