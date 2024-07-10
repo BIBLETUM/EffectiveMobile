@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResultListener
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -15,6 +16,7 @@ import com.example.effectivemobile.R
 import com.example.effectivemobile.databinding.FragmentMainBinding
 import com.example.effectivemobile.presentation.EffectiveMobileApplication
 import com.example.effectivemobile.presentation.ViewModelFactory
+import com.example.effectivemobile.presentation.bottom_sheet.BottomSheetSearch
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -70,7 +72,7 @@ class MainFragment : Fragment() {
                     }
 
                     is OfferFragmentState.Loading -> {
-                        binding.progress.isVisible = false
+                        binding.progress.isVisible = true
                     }
 
                     is OfferFragmentState.Content -> {
@@ -80,20 +82,21 @@ class MainFragment : Fragment() {
                 }
             }
         }
-        lifecycleScope.launch {
-            viewModel.shouldOpenModalWindow.collect { shouldOpenModalWindow ->
-                if (shouldOpenModalWindow) {
-                    val action =
-                        MainFragmentDirections.actionMainFragmentToBottomSheetSearch(binding.departureET.text.toString())
-                    findNavController().navigate(action)
-                } else {
-                    Toast.makeText(
-                        requireContext(),
-                        getString(R.string.fill_departure_field), Toast.LENGTH_SHORT
-                    ).show()
-                }
-            }
-        }
+    }
+
+    private fun openNextScreen(arrival: String, departure: String) {
+        val action =
+            MainFragmentDirections.actionMainFragmentToSearchFeaturedTicketsFragment(
+                departure,
+                arrival
+            )
+        findNavController().navigate(action)
+    }
+
+    private fun openPlaceHolder() {
+        val action =
+            MainFragmentDirections.actionMainFragmentToPlaceholderFragment2()
+        findNavController().navigate(action)
     }
 
     private fun getTextsFromPrefs() {
@@ -118,7 +121,34 @@ class MainFragment : Fragment() {
     private fun setUpListeners() {
         with(binding) {
             arrivalET.setOnClickListener {
-                viewModel.textChanged(departureET.text.toString())
+                if (departureET.text.toString().isNotEmpty()) {
+                    val bottomSheetFragment =
+                        BottomSheetSearch.newInstance(departureText = binding.departureET.text.toString())
+
+                    bottomSheetFragment.show(parentFragmentManager, bottomSheetFragment.tag)
+                    bottomSheetFragment.setFragmentResultListener(BottomSheetSearch.REQUEST_KEY) { requestKey, bundle ->
+                        val arrivalText = bundle.getString(ARRIVAL_KEY, "")
+
+                        if (arrivalText.isNotEmpty()) {
+                            binding.arrivalET.setText(arrivalText)
+                            openNextScreen(
+                                binding.arrivalET.text.toString(),
+                                binding.departureET.text.toString()
+                            )
+                        }
+
+                        val shouldOpenPlaceHolder =
+                            bundle.getBoolean(BottomSheetSearch.SHOULD_OPEN_PLACEHOLDER, false)
+                        if (shouldOpenPlaceHolder) {
+                            openPlaceHolder()
+                        }
+                    }
+                } else {
+                    Toast.makeText(
+                        requireContext(),
+                        getString(R.string.fill_departure_field), Toast.LENGTH_SHORT
+                    ).show()
+                }
             }
         }
     }
@@ -130,7 +160,7 @@ class MainFragment : Fragment() {
 
     companion object {
         fun newInstance() = MainFragment()
-        const val DEPARTURE_KEY = "departureText"
-        const val ARRIVAL_KEY = "arrivalText"
+        const val ARRIVAL_KEY = "ArrivalKey"
+        const val DEPARTURE_KEY = "DepartureKey"
     }
 }

@@ -33,4 +33,7 @@ class PlaceholderFragmentMenu : Fragment() {
         _binding = null
         super.onDestroyView()
     }
+    companion object {
+        fun newInstance() = PlaceholderFragmentMenu()
+    }
 }

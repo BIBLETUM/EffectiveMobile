@@ -2,14 +2,14 @@ package com.example.effectivemobile.presentation.bottom_sheet
 
 import android.content.Context
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
+import android.widget.LinearLayout
+import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import com.example.effectivemobile.R
 import com.example.effectivemobile.databinding.FragmentBottomSheetSearchBinding
 import com.example.effectivemobile.presentation.EffectiveMobileApplication
@@ -49,8 +49,6 @@ class BottomSheetSearch : BottomSheetDialogFragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentBottomSheetSearchBinding.inflate(inflater, container, false)
-        val args: BottomSheetSearchArgs by navArgs()
-        departureText = args.departureText
         return binding.root
     }
 
@@ -58,31 +56,51 @@ class BottomSheetSearch : BottomSheetDialogFragment() {
         super.onStart()
         val dialog = dialog as BottomSheetDialog
         val bottomSheet =
-            dialog.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet) as FrameLayout
+            dialog.findViewById<View>(R.id.standard_bottom_sheet) as LinearLayout
         val behavior = BottomSheetBehavior.from(bottomSheet)
         behavior.state = BottomSheetBehavior.STATE_EXPANDED
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        onBackPressed()
+
+        arguments?.let {
+            departureText = it.getString(DEPARTURE_KEY) ?: ""
+        }
+        binding.departureET.text = departureText
+
         viewModel =
             ViewModelProvider(this, viewModelFactory)[BottomSheetSearchViewModel::class.java]
-        binding.departureET.text = departureText
         setUpListeners()
         observeViewModel()
     }
+
+    private fun onBackPressed() {
+        requireView().isFocusableInTouchMode = true
+        requireView().requestFocus()
+        requireView().setOnKeyListener { _, keyCode, event ->
+            if (keyCode == KeyEvent.KEYCODE_BACK && event.action == KeyEvent.ACTION_UP) {
+                dismiss()
+                true
+            } else {
+                false
+            }
+        }
+    }
+
 
     private fun observeViewModel() {
         lifecycleScope.launch {
             viewModel.shouldOpenFeaturedTicketsFragment.collect { shouldOpenFeaturedTicketsFragment ->
                 if (shouldOpenFeaturedTicketsFragment) {
                     delay(500)
-                    val action =
-                        BottomSheetSearchDirections.actionBottomSheetSearchToSearchFeaturedTicketsFragment(
-                            departureText,
-                            binding.arrivalET.text.toString()
-                        )
-                    findNavController().navigate(action)
+                    val resultBundle = Bundle().apply {
+                        putString(ARRIVAL_KEY, binding.arrivalET.text.toString())
+                    }
+                    setFragmentResult(REQUEST_KEY, resultBundle)
+                    dismiss()
                 }
             }
         }
@@ -123,8 +141,25 @@ class BottomSheetSearch : BottomSheetDialogFragment() {
     }
 
     private fun openPlaceholder() {
-        val action =
-            BottomSheetSearchDirections.actionBottomSheetSearchToPlaceholderFragment2()
-        findNavController().navigate(action)
+        val resultBundle = Bundle().apply {
+            putBoolean(SHOULD_OPEN_PLACEHOLDER, true)
+        }
+        setFragmentResult(REQUEST_KEY, resultBundle)
+        dismiss()
+    }
+
+    companion object {
+        const val REQUEST_KEY = "bottomSheetRequestKey"
+        const val ARRIVAL_KEY = "ArrivalKey"
+        const val DEPARTURE_KEY = "DepartureKey"
+        const val SHOULD_OPEN_PLACEHOLDER = "OpenPlaceholder"
+        fun newInstance(departureText: String): BottomSheetSearch {
+            val fragment = BottomSheetSearch()
+            val args = Bundle().apply {
+                putString(DEPARTURE_KEY, departureText)
+            }
+            fragment.arguments = args
+            return fragment
+        }
     }
 }
