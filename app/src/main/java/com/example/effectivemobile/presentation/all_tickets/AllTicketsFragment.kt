@@ -15,6 +15,8 @@ import androidx.navigation.fragment.navArgs
 import com.example.effectivemobile.databinding.FragmentAllTicketsBinding
 import com.example.effectivemobile.presentation.EffectiveMobileApplication
 import com.example.effectivemobile.presentation.ViewModelFactory
+import com.example.effectivemobile.presentation.parseDate
+import com.example.effectivemobile.presentation.parsePassengers
 import kotlinx.coroutines.launch
 import java.util.Locale
 import javax.inject.Inject
@@ -81,7 +83,7 @@ class AllTicketsFragment : Fragment() {
     private fun setInitialText() {
         with(binding) {
             routeTV.setText(String.format("%s - %s", departureText, arrivalText))
-            datePassengersTV.setText(String.format("%s %s", date, passengers))
+            datePassengersTV.setText(String.format("%s, %s", date, passengers))
         }
     }
 
@@ -123,44 +125,4 @@ class AllTicketsFragment : Fragment() {
         passengers = parsePassengers(args.passenger)
         date = parseDate(args.date)
     }
-
-    private fun parseDate(date: String): String {
-        val day = date.substringBefore(" ").trim()
-        val month = date.substringAfter(" ").trim()
-
-        val fullMonth = when (month) {
-            "янв" -> "января"
-            "фев" -> "февраля"
-            "мар" -> "марта"
-            "апр" -> "апреля"
-            "май" -> "мая"
-            "июн" -> "июня"
-            "июл" -> "июля"
-            "авг" -> "августа"
-            "сен" -> "сентября"
-            "окт" -> "октября"
-            "ноя" -> "ноября"
-            "дек" -> "декабря"
-            else -> month
-        }
-        return String.format("%s %s", day, fullMonth)
-    }
-
-    private fun parsePassengers(passengers: String): String {
-        val parts = passengers.split(",")
-
-        val number = parts[0].trim()
-        val category = parts[1].trim()
-
-        val categoryFixed = when (category.lowercase(Locale.ROOT)) {
-            "эконом" -> "пассажир"
-            "business" -> "бизнес"
-            "vip" -> "VIP"
-            else -> category
-        }
-
-        return String.format("%s %s", number, categoryFixed)
-
-    }
-
 }

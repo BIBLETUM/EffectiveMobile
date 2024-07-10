@@ -3,6 +3,7 @@ package com.example.effectivemobile.presentation
 import com.example.effectivemobile.presentation.featured_tickets.Date
 import java.time.DayOfWeek
 import java.util.Calendar
+import java.util.Locale
 
 
 fun parseCalendar(calendar: Calendar): Date {
@@ -29,20 +30,19 @@ fun parseCalendar(calendar: Calendar): Date {
 }
 
 fun getMonthStringByInt(month: Int): String {
-    month + 1
     return when (month) {
-        1 -> "янв"
-        2 -> "фев"
-        3 -> "мар"
-        4 -> "апр"
-        5 -> "май"
-        6 -> "июн"
-        7 -> "июл"
-        8 -> "авг"
-        9 -> "сен"
-        10 -> "окт"
-        11 -> "ноя"
-        12 -> "дек"
+        0 -> "янв"
+        1 -> "фев"
+        2 -> "мар"
+        3 -> "апр"
+        4 -> "май"
+        5 -> "июн"
+        6 -> "июл"
+        7 -> "авг"
+        8 -> "сен"
+        9 -> "окт"
+        10 -> "ноя"
+        11 -> "дек"
         else -> "Unknown"
     }
 }
@@ -58,4 +58,43 @@ fun getDayOfWeekByDayOffWeek(dayOfWeek: DayOfWeek): String {
         DayOfWeek.SATURDAY -> "сб"
         else -> "Unknown"
     }
+}
+
+fun parseDate(date: String): String {
+    val day = date.substringBefore(" ").trim()
+    val month = date.substringAfter(" ").trim().replace(",", "")
+
+    val fullMonth = when (month) {
+        "янв" -> "января"
+        "фев" -> "февраля"
+        "мар" -> "марта"
+        "апр" -> "апреля"
+        "май" -> "мая"
+        "июн" -> "июня"
+        "июл" -> "июля"
+        "авг" -> "августа"
+        "сен" -> "сентября"
+        "окт" -> "октября"
+        "ноя" -> "ноября"
+        "дек" -> "декабря"
+        else -> month
+    }
+    return String.format("%s %s", day, fullMonth)
+}
+
+fun parsePassengers(passengers: String): String {
+    val parts = passengers.split(",")
+
+    val number = parts[0].trim()
+    val category = parts[1].trim()
+
+    val categoryFixed = when (category.lowercase(Locale.ROOT)) {
+        "эконом" -> "пассажир"
+        "business" -> "бизнес"
+        "vip" -> "VIP"
+        else -> category
+    }
+
+    return String.format("%s %s", number, categoryFixed)
+
 }
